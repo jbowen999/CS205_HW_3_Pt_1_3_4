@@ -10,39 +10,51 @@
             Console.WriteLine(res1);
             Console.WriteLine(res2);
             Console.WriteLine("--------------------");
+
+
             Rational rational = new Rational(3, 2);
+
             // Writing the initial rational number
             Console.WriteLine("Initial rational number:");
-            rational.WriteRational(rational);
+            rational.WriteRational();
+
 
             // Negating the rational number
-            rational.Negate(rational);
+            rational.Negate();
             Console.WriteLine("After negation:");
-            rational.WriteRational(rational);
+            rational.WriteRational();
 
             // Negating again to return to original
-            rational.Negate(rational);
+            rational.Negate();
             Console.WriteLine("After negating again to return to original:");
-            rational.WriteRational(rational);
+            rational.WriteRational();
 
             // Inverting the rational number
-            rational.Invert(rational);
+            rational.Invert();
             Console.WriteLine("After inversion:");
-            rational.WriteRational(rational);
+            rational.WriteRational();
 
             // Converting to double
-            double decimalValue = rational.ToDouble(rational);
+            double decimalValue = rational.ToDouble();
             Console.WriteLine("As a double: " + decimalValue);
 
             // Demonstrating GCD calculation
             Console.WriteLine("GCD of 225 and 500:");
             Console.WriteLine(Rational.GCD(225, 500));
 
+            // Mistake: Attempting to use a static method GCD as an instance method
+            // This will result in a compilation error
+            // int gcd = rational.GCD(225, 500); // Mistake here
+
+            // Mistake: Attempting to use an instance method Add as if it were static
+            // This will result in a compilation error
+            // Rational result = Rational.Add(r1, r2); // Mistake here
+
             Rational r1 = new Rational(1, 3);
             Rational r2 = new Rational(1, 6);
 
             // Add the two Rational numbers
-            Rational result = Rational.Add(r1, r2);
+            Rational result = r1.Add(r2);
 
             // Print the result
             Console.WriteLine($"The result of adding {r1.numerator}/{r1.denominator} and {r2.numerator}/{r2.denominator} is {result.numerator}/{result.denominator}");

@@ -17,27 +17,32 @@ namespace CS205_HW_3
             this.numerator = numerator;
             this.denominator = denominator;
         }
-        public void WriteRational(Rational r)
+        public void WriteRational()
         {
-            Console.WriteLine($"{r.numerator}/{r.denominator}");
+            Console.WriteLine($"{this.numerator}/{this.denominator}");
         }
-        public void Negate(Rational r)
+        public void Negate()
         {
-            r.numerator *= -1;
+            this.numerator *= -1;
         }
-        public void Invert(Rational r)
+        public void Invert()
         {
 
-            int temp = r.numerator;
-            r.numerator = r.denominator;
-            r.denominator = temp;
+            int temp = this.numerator;
+            this.numerator = this.denominator;
+            this.denominator = temp;
         }
-        public double ToDouble(Rational r)
+        public double ToDouble()
         {
-            float n = (float)r.numerator;
-            float d = (float)r.denominator;
-            return n / d;
+            return (double)this.numerator / this.denominator;
         }
+
+        // Mistake: Trying to call GCD as if it were an instance method
+        // This will cause a compilation error because GCD is static
+        //public int MistakenGCDCall()
+        //{
+        //    return this.GCD(15, 10); // Mistake here
+        //}
         public static int GCD(int n1, int n2)
         {
             
@@ -50,24 +55,30 @@ namespace CS205_HW_3
                 return GCD(n2, n1 % n2);
             }
         }
+
+
         public static int LCM(int a, int b)
-        { return (a * b) / GCD(a, b); }
-        public static Rational Add(Rational r1, Rational r2)
         {
-            if (r1.denominator == r2.denominator)
-            {
-                int res = r1.numerator + r2.numerator;
-                return new Rational(res, r2.denominator);
-            }
-            else
-            {
-                int lcm = LCM(r1.denominator, r2.denominator);
-            int adjustedNumerator1 = r1.numerator * (lcm / r1.denominator);
-            int adjustedNumerator2 = r2.numerator * (lcm / r2.denominator);
+            return (a * b) / GCD(a, b); 
+        }
+
+        // Mistake: Trying to call an instance method as if it were static
+        // This will cause a compilation error because Add is an instance method
+        //public static Rational MistakenAddCall(Rational r1, Rational r2)
+        //{
+        //    return Add(r1, r2); // Mistake here
+        //}
+        public Rational Add(Rational r)
+        {
+            int lcm = LCM(this.denominator, r.denominator);
+
+            int adjustedNumerator1 = this.numerator * (lcm / this.denominator);
+            int adjustedNumerator2 = r.numerator * (lcm / r.denominator);
 
             int resultNumerator = adjustedNumerator1 + adjustedNumerator2;
+
             return new Rational(resultNumerator, lcm);
-            }
+        }
         }
     }
-}
+
